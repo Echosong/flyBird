@@ -1,16 +1,18 @@
 import Sprite from '../base/sprite'
+import BackGround from './background'
 
 const screenWidth = window.innerWidth
 const screenHeight = window.innerHeight
 
 const BG_IMG_SRC = 'images/ground.png'
-const BG_WIDTH = 432
-const BG_HEIGHT = 160
+const WIDTH = 432
+const HEIGHT = 148
+const BG_HEIGHT = 644
 
-export default class BackGround extends Sprite {
+export default class Ground extends Sprite {
   constructor(ctx) {
-    super(BG_IMG_SRC, BG_WIDTH, BG_HEIGHT)
-
+    super(BG_IMG_SRC, WIDTH, HEIGHT)
+    this.height = HEIGHT/ BG_HEIGHT * screenHeight;
     this.top = 0
     this.left = 0;
     this.render(ctx)
@@ -21,12 +23,8 @@ export default class BackGround extends Sprite {
     if(this.left <=- screenWidth) this.left = 0;
   }
 
-   /**
-   * 背景图重绘函数
-   * 绘制两张图片，两张图片大小和屏幕一致
-   * 第一张漏出高度为top部分，其余的隐藏在屏幕上面
-   * 第二张补全除了top高度之外的部分，其余的隐藏在屏幕下面
-   */
+
+
   render(ctx) {
     ctx.drawImage(
       this.img,
@@ -37,7 +35,7 @@ export default class BackGround extends Sprite {
       this.left,
       screenHeight - this.height ,
       this.width,
-      this.height +30,
+      this.height +80,
     )
     ctx.drawImage(
       this.img,
@@ -48,7 +46,7 @@ export default class BackGround extends Sprite {
       screenWidth + this.left,
       screenHeight - this.height ,
       this.width,
-      this.height+30,
+      this.height +80,
     )
   }
 }
